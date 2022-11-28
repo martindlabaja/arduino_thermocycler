@@ -84,32 +84,28 @@ void loop() {
 
   // ------------------ SERIAL INPUT ------------------
   if(Serial.available()){
+    
     String rxString = "";
-    String strArr[11]; //Set the size of the array to equal the number of values you will be receiveing.
-    //Keep looping until there is something in the buffer.
-    while (Serial.available()) {
-      //Delay to allow byte to arrive in input buffer.
-      delay(20);
-      //Read a single character from the buffer.
+    String strArr[11]; 
+    
+    while (Serial.available()) {      
+      delay(20);      
       char ch = Serial.read();
-      //Append that single character to a string.
       rxString+= ch;
     }
+    
     int stringStart = 0;
     int arrayIndex = 0;
-    for (int i=0; i < rxString.length(); i++){
-      //Get character and check if it's our "special" character.
-      if(rxString.charAt(i) == ','){
-        //Clear previous values from array.
-        strArr[arrayIndex] = "";
-        //Save substring into array.
-        strArr[arrayIndex] = rxString.substring(stringStart, i);
-        //Set new string starting point.
+    
+    for (int i=0; i < rxString.length(); i++){      
+      if(rxString.charAt(i) == ','){        
+        strArr[arrayIndex] = "";        
+        strArr[arrayIndex] = rxString.substring(stringStart, i);        
         stringStart = (i+1);
         arrayIndex++;
       }
-    }
-    //Put values from the array into the variables.
+    }    
+    
     String value0 = strArr[0];
     String value1 = strArr[1];
     String value2 = strArr[2];
@@ -121,7 +117,7 @@ void loop() {
     String value8 = strArr[8];
     String value9 = strArr[9];
     String value10 = strArr[10];
-    //Convert string to int if you need it.
+    
     T0 = value0.toInt();
     T1 = value1.toInt();
     T2 = value2.toInt();
@@ -131,8 +127,7 @@ void loop() {
     S1 = value6.toInt();
     S2 = value7.toInt();
     S3 = value8.toInt();
-    S4 = value9.toInt();
-    totalCycles = value10.toInt();
+    S4 = value9.toInt();    
   }
 
   // ------------------ TICK ------------------------------------------------------------------------------
