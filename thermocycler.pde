@@ -82,7 +82,7 @@ void hbridge(bool heating) {
 
 void loop() {
 
-  // serial input // parameters
+  // ------------------ SERIAL INPUT ------------------
   if(Serial.available()){
     String rxString = "";
     String strArr[11]; //Set the size of the array to equal the number of values you will be receiveing.
